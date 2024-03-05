@@ -3,6 +3,9 @@ package ru.hogeltbellai.chatfilter;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.hogeltbellai.chatfilter.api.config.ConfigAPI;
+import ru.hogeltbellai.chatfilter.listener.ChatListener;
+
+import java.util.List;
 
 /**
  * Programming by HogeltBellai
@@ -10,14 +13,17 @@ import ru.hogeltbellai.chatfilter.api.config.ConfigAPI;
  */
 public final class ChatFilter extends JavaPlugin {
 
-    @Getter private static ChatFilter instance;
+    @Getter public static ChatFilter instance;
+    @Getter public List<String> wordsBlocked;
 
     @Override
     public void onEnable() {
         instance = this;
 
         new ConfigAPI("config");
-        new ConfigAPI("words");
+        wordsBlocked = new ConfigAPI("words").getConfig().getStringList("blocked_word");
+
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
     }
 
     @Override

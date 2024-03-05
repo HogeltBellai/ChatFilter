@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import ru.hogeltbellai.chatfilter.ChatFilter;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -15,10 +16,11 @@ public class ChatListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+        String message = event.getMessage();
 
-        if() {
+        String censoredMessage = censorText(message, ChatFilter.getInstance().getWordsBlocked());
 
-        }
+        event.setMessage(censoredMessage);
     }
 
     private String censorText(String inputText, List<String> forbiddenWords) {
