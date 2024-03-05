@@ -3,3 +3,6 @@ version: '${project.version}'
 main: ru.hogeltbellai.chatfilter.ChatFilter
 api-version: '1.20'
 authors: [HogeltBellai]
+
+commands:
+  chatfilter:
